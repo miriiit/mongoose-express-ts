@@ -1,4 +1,5 @@
 import { Document, model, Schema } from "mongoose";
+import { TSubscription } from "subscription";
 
 /**
  * Type to model the User Schema for TypeScript.
@@ -7,10 +8,11 @@ import { Document, model, Schema } from "mongoose";
  * @param avatar:string
  */
 
+
+
 export type TUser = {
   email: string;
-  password: string;
-  avatar: string;
+  password?: string;
 };
 
 /**
@@ -35,13 +37,13 @@ const userSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  avatar: {
-    type: String,
-  },
   date: {
     type: Date,
     default: Date.now,
   },
+  subscriptions: {
+    type: Object,
+  }
 });
 
 /**
@@ -54,6 +56,4 @@ const userSchema: Schema = new Schema({
  * @param avatar:string
  */
 
-const User = model<IUser>("User", userSchema);
-
-export default User;
+export const User = model<IUser>("User", userSchema);
